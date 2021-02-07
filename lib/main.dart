@@ -33,7 +33,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  WeightData _weightData = WeightData();
 
   @override
   Widget build(BuildContext context) {
@@ -47,15 +46,15 @@ class _MyHomePageState extends State<MyHomePage> {
           child:  ListView.builder(itemBuilder: (context,index){
             return GestureDetector(
                 onTap: (){
-
+                  Navigator.of(context).push(MaterialPageRoute(builder: WeightData.listData[index].weightBuilder));
                 },
                 child:Card(
                   child: Container(
                     padding: EdgeInsets.all(10),
-                    child: Text(_weightData.listData[index].weightName,style: TextStyle(color: Colors.blue),),
+                    child: Text(WeightData.listData[index].weightName,style: TextStyle(color: Colors.blue),),
                   ),
                 ));
-          },itemCount: _weightData.listData.length,
+          },itemCount: WeightData.listData.length,
           )
       ),
       floatingActionButton: FloatingActionButton(

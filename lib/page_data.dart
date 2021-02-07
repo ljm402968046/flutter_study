@@ -1,8 +1,9 @@
+import 'package:flutter/widgets.dart';
+
 class PageData{
   String weightName;
-  String weightPage;
-
-  PageData(this.weightName, this.weightPage);
+  WidgetBuilder weightBuilder;
 
 
+  PageData(this.weightName, this.weightBuilder);
 }
