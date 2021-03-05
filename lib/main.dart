@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Container(
           alignment: Alignment.center,
           margin: EdgeInsets.all(10),
-          child:  ListView.builder(itemBuilder: (context,index){
+          child:  /*ListView.builder(itemBuilder: (context,index){
             return GestureDetector(
                 onTap: (){
                   Navigator.of(context).push(MaterialPageRoute(builder: WeightData.listData[index].weightBuilder));
@@ -57,7 +57,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ));
           },itemCount: WeightData.listData.length,
+          )*/
+          Container(
+            alignment: Alignment.topCenter,
+            child: SingleChildScrollView(
+              child: _buildList(),
+            )
           )
+
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async{
@@ -69,6 +76,32 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+  _buildList(){
+    return ExpansionPanelList(
+      expansionCallback: (index,isExpended){
+        setState(() {
+          WeightData.listData[index].isExpended = !isExpended;
+        });
+
+      },
+      children: WeightData.listData.map((e) =>
+          ExpansionPanel(
+              isExpanded: e.isExpended,
+              headerBuilder:(context, isExpanded) {
+                return GestureDetector(
+                    onTap: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder: e.weightBuilder));
+                    },
+                    child:ListTile(
+                      title: Text(e.weightName,style: TextStyle(color: Colors.blue),),
+                    ));
+
+                /**/
+              }, body: Container(height: 100,child: Text(e.content),)
+          )
+      ).toList(),
     );
   }
 }
