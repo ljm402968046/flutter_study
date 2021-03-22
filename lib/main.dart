@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:ljm_flutter/test/route_test.dart';
 import 'package:ljm_flutter/utils/toast_utils.dart';
 
-import 'weight_data.dart';
+import 'data/weight_data.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,7 +12,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
       // debugShowMaterialGrid: true,
       // showPerformanceOverlay: true,
       home: MyHomePage(title: 'Flutter Demo Home Page'),
+      getPages: WeightData().getpages,
     );
   }
 }
@@ -92,7 +93,11 @@ class _MyHomePageState extends State<MyHomePage> {
               headerBuilder:(context, isExpanded) {
                 return GestureDetector(
                     onTap: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder: e.weightBuilder));
+                      if(e.weightBuilder!=null){
+                        Navigator.of(context).push(MaterialPageRoute(builder: e.weightBuilder));
+                      }else{
+                        e.f();
+                      }
                     },
                     child:ListTile(
                       title: Text(e.weightName,style: TextStyle(color: Colors.blue),),

@@ -5,5 +5,6 @@ class PageData{
   String content;
   bool isExpended ;
   WidgetBuilder weightBuilder;
-  PageData(this.weightName,this.content,this.isExpended, this.weightBuilder);
+  final Function f;
+  PageData(this.weightName,this.content,this.isExpended, this.weightBuilder,this.f);
 }
